@@ -1,9 +1,15 @@
-﻿namespace ToDoList.ViewModels
+﻿using ToDoList.Services;
+
+namespace ToDoList.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-#pragma warning disable CA1822 // Mark members as static
-        public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+        public ToDoListViewModel ToDoList { get; }
+
+        public MainWindowViewModel()
+        {
+            var service = new ToDoListService();
+            ToDoList = new ToDoListViewModel(service.GetItems());
+        }
     }
 }
